@@ -2,6 +2,7 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 var mime = require('mime');
+var port =  process.env.PORT || 8080;
 var cache = {};
 var currency = require('./lib/test-currency');
 var server = http.createServer(function(request, response) {
@@ -14,8 +15,8 @@ var server = http.createServer(function(request, response) {
     var absPath = './' + filePath;
     serveStatic(response, cache, absPath);
 });
-    server.listen(3000, function() {
-            console.log("Server listening on port 3000.");
+    server.listen(port, function() {
+            console.log("Server listening on port "+port);
             console.log('50 Canadian dollars equals this amount of US dollars:');
             console.log(currency.canadianToUS(50));
     });
