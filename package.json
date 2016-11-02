@@ -6,6 +6,9 @@
     "socket.io": "~0.9.6",
     "mime": "~1.2.7"
   },
+  "scripts": {
+    "start": "node server.js"
+  },
   "devDependencies": {
     "express": "^4.14.0",
     "nodemon": "^1.11.0"
