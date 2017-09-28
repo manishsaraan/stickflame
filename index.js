@@ -8,6 +8,7 @@ var im = require('imagemagick');
 var ip = require("ip");
 var port =  process.env.PORT || 8888;
 var cloudinary = require('cloudinary');
+var config = require('./config/config');
 var bodyParser = require("body-parser");
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
@@ -21,12 +22,12 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 cloudinary.config({
-  cloud_name: 'stickflame', 
-  api_key: '841726751724758', 
-  api_secret: 's0zaqfDqxVLjgB56aohKc3Ww7fU' 
+  cloud_name: config.cloudinaryName, 
+  api_key: config.cloudinaryKey, 
+  api_secret:config.cloudinarySecret,  
 });
 //var url = 'mongodb://localhost:27017/chatapp';
-var url = 'mongodb://manish:admin981@ds141937.mlab.com:41937/stickflame';
+var url = config.DbUri;
 var sess = {}; var username;
 app.use(session({secret: 'thisisasecret'}));
 //var mongoose = require('mongoose');
