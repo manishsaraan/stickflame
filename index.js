@@ -16,12 +16,19 @@ var session = require('express-session');
 var ips = [];
 app.engine('.html', require('ejs').__express);
 app.set('views', __dirname + '/public/views');
+var User = require('./config/User');
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+mongoose.connect(config.DbUri);
 app.set('view engine', 'html');
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
+
 //including models
+var User = mongoose.model('User');
+
 cloudinary.config({
   cloud_name: config.cloudinaryName, 
   api_key: config.cloudinaryKey, 
@@ -62,6 +69,7 @@ app.post('/upload', upload.single('image'), function (req, res) {
 
 app.post("/",function(req,res){
    username  =req.body.name; 
+   console.log(username,'----------');
    sess = req.session;
    sess.username = username;
    var currentIp = ip.address() ;

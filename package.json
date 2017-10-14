@@ -1,5 +1,5 @@
 {
-  "name": "socket chat app",
+  "name": "socket_chat_app",
   "version": "1.0.0",
   "description": "socket chat app",
   "main": "index.js",
