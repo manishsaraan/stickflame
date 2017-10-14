@@ -13,6 +13,13 @@ var bodyParser = require("body-parser");
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var session = require('express-session');
+
+//passport code goes here
+var passport = require('passport');
+// require('./config/passport')(passport); 
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
 var ips = [];
 app.engine('.html', require('ejs').__express);
 app.set('views', __dirname + '/public/views');
