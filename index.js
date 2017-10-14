@@ -21,17 +21,19 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
+//including models
 cloudinary.config({
   cloud_name: config.cloudinaryName, 
   api_key: config.cloudinaryKey, 
   api_secret:config.cloudinarySecret,  
 });
-//var url = 'mongodb://localhost:27017/chatapp';
+
+
 var url = config.DbUri;
 var sess = {}; var username;
 app.use(session({secret: 'thisisasecret'}));
-//var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost/chatapp');
+
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/upload/')
@@ -44,6 +46,8 @@ var storage = multer.diskStorage({
         cb(null, upload_file_name)
     }
 });
+
+
 app.use(express.static(__dirname + '/public'));
 var upload = multer({ storage: storage });
 app.post('/upload', upload.single('image'), function (req, res) {  
@@ -78,8 +82,7 @@ app.post("/",function(req,res){
     db.close();
   }
 });
-//      ips[currentIp] = username;
-//      console.log(ips);
+
    res.render('index',{name:username});  
 });
 
@@ -132,6 +135,10 @@ app.get("/",function(req,res){
   }
 });
 });
+
+/*
+  Socket Code Goes here
+ */
 io.on('connection',function(socket){
     console.log('A User connected');
     socket.on("disconnect",function(){
@@ -174,6 +181,8 @@ io.on('connection',function(socket){
     io.emit('file_upload', msg);
   });
 });
+
+//start the server
 http.listen(port,function(){
     console.log('listing at '+port);
 });
