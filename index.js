@@ -12,6 +12,7 @@ var bodyParser = require("body-parser");
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var session = require('express-session');
+var flash    = require('connect-flash');
 
 //passport code goes here
 var passport = require('passport');
@@ -31,6 +32,7 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
+app.use(flash()); // use connect-flash for flash messages stored in session
 
 //including models
 var User = mongoose.model('User');
