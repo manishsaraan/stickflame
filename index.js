@@ -6,7 +6,7 @@ var io = require('socket.io')(http);
 var im = require('imagemagick');
 var ip = require("ip");
 var port =  process.env.PORT || 8888;
-var cloudinary = require('cloudinary');
+
 var config = require('./config/config');
 var bodyParser = require("body-parser");
 var mongodb = require('mongodb');
@@ -35,11 +35,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 //including models
 var User = mongoose.model('User');
 
-cloudinary.config({
-  cloud_name: config.cloudinaryName, 
-  api_key: config.cloudinaryKey, 
-  api_secret:config.cloudinarySecret,  
-});
+
 
 
 var url = config.DbUri;
